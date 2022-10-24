@@ -10,7 +10,7 @@ const handler = async (event) => {
         statusCode: 302,
         headers: {
             Location:
-                `https://${myShopifyDomain}admin/oauth/authorize?client_id=${shopifyAppApiKey}&scope=${scope}&redirect_uri=${redirectedURL}&state=${nonce}&grant_options[]=${accessMode}`
+                `https://${myShopifyDomain}/admin/oauth/authorize?client_id=${shopifyAppApiKey}&scope=${scope}&redirect_uri=${redirectedURL}&state=${nonce}&grant_options[]=${accessMode}`
         }
     };
 };
