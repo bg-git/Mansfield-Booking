@@ -1,0 +1,47 @@
+{
+	"date": "2021-10-08",
+	"status": "available",
+	"spots": [
+		{
+			"status": "available",
+			"start_time": "2021-10-08T12:00:00-04:00",
+			"invitees_remaining": 1
+		},
+		{
+			"status": "available",
+			"start_time": "2021-10-08T12:30:00-04:00",
+			"invitees_remaining": 1
+		},
+		{
+			"status": "available",
+			"start_time": "2021-10-08T13:00:00-04:00",
+			"invitees_remaining": 1
+		},
+		{
+			"status": "available",
+			"start_time": "2021-10-08T13:30:00-04:00",
+			"invitees_remaining": 1
+		},
+		{
+			"status": "available",
+			"start_time": "2021-10-08T14:00:00-04:00",
+			"invitees_remaining": 1
+		},
+		{
+			"status": "available",
+			"start_time": "2021-10-08T14:30:00-04:00",
+			"invitees_remaining": 1
+		},
+		{
+			"status": "available",
+			"start_time": "2021-10-08T15:00:00-04:00",
+			"invitees_remaining": 1
+		},
+		{
+			"status": "available",
+			"start_time": "2021-10-08T15:30:00-04:00",
+			"invitees_remaining": 1
+		}
+	],
+	"invitee_events": []
+}

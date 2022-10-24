@@ -1,0 +1,41 @@
+{
+    "disabled": [0, 1],
+    "days": [
+        {
+            "date": "2021-10-05",
+            "available": true,
+            "spots": [
+                {
+                    "start_time": "2021-10-05 09:30:00",
+                    "slots": 2
+                },
+                {
+                    "start_time": "2021-10-05 10:30:00",
+                    "slots": 4
+                },
+                {
+                    "start_time": "2021-10-05 11:00:00",
+                    "slots": 0
+                }
+            ]
+        },
+        {
+            "date": "2021-10-06",
+            "available": true,
+            "spots": [
+                {
+                    "start_time": "2021-10-05 14:30:00",
+                    "slots": 2
+                },
+                {
+                    "start_time": "2021-10-05 15:00:00",
+                    "slots": 4
+                },
+                {
+                    "start_time": "2021-10-05 16:00:00",
+                    "slots": 3
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+[
+    {
+        "su": {
+            "availability": false,
+            "start_time": "09:30",
+            "end_time": "17:30",
+            "slots": 4
+        },
+        "mo": {
+            "availability": true,
+            "start_time": "09:30",
+            "end_time": "17:30",
+            "slots": 4
+        },
+        "tu": {
+            "availability": true,
+            "start_time": "09:30",
+            "end_time": "17:30",
+            "slots": 4
+        },
+        "we": {
+            "availability": true,
+            "start_time": "09:30",
+            "end_time": "17:30",
+            "slots": 4
+        },
+        "th": {
+            "availability": true,
+            "start_time": "09:30",
+            "end_time": "17:30",
+            "slots": 4
+        },
+        "fr": {
+            "availability": true,
+            "start_time": "09:30",
+            "end_time": "17:30",
+            "slots": 4
+        },
+        "sa": {
+            "availability": true,
+            "start_time": "09:30",
+            "end_time": "16:30",
+            "slots": 4
+        }
+    }
+]

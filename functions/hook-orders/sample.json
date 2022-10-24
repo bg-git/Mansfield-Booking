@@ -1,0 +1,342 @@
+{
+	"id": 4031517556795,
+	"admin_graphql_api_id": "gid://shopify/Order/4031517556795",
+	"app_id": 5703193,
+	"browser_ip": "188.43.136.33",
+	"buyer_accepts_marketing": true,
+	"cancel_reason": null,
+	"cancelled_at": null,
+	"cart_token": null,
+	"checkout_id": 21170732793915,
+	"checkout_token": "4e1342a3cde9274d234aeb2db023e891",
+	"client_details": {
+		"accept_language": "en-US,en;q=0.9",
+		"browser_height": 847,
+		"browser_ip": "188.43.136.33",
+		"browser_width": 405,
+		"session_hash": null,
+		"user_agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Mobile Safari/537.36"
+	},
+	"closed_at": null,
+	"confirmed": true,
+	"contact_email": "poberezhetspavlo@gmail.com",
+	"created_at": "2021-10-02T19:33:45+01:00",
+	"currency": "GBP",
+	"current_subtotal_price": "0.00",
+	"current_subtotal_price_set": {
+		"shop_money": { "amount": "0.00", "currency_code": "GBP" },
+		"presentment_money": { "amount": "0.00", "currency_code": "GBP" }
+	},
+	"current_total_discounts": "8.33",
+	"current_total_discounts_set": {
+		"shop_money": { "amount": "8.33", "currency_code": "GBP" },
+		"presentment_money": { "amount": "8.33", "currency_code": "GBP" }
+	},
+	"current_total_duties_set": null,
+	"current_total_price": "0.00",
+	"current_total_price_set": {
+		"shop_money": { "amount": "0.00", "currency_code": "GBP" },
+		"presentment_money": { "amount": "0.00", "currency_code": "GBP" }
+	},
+	"current_total_tax": "0.00",
+	"current_total_tax_set": {
+		"shop_money": { "amount": "0.00", "currency_code": "GBP" },
+		"presentment_money": { "amount": "0.00", "currency_code": "GBP" }
+	},
+	"customer_locale": "en",
+	"device_id": null,
+	"discount_codes": [
+		{ "code": "PAVLOTEST100OFF", "amount": "8.33", "type": "percentage" }
+	],
+	"email": "poberezhetspavlo@gmail.com",
+	"estimated_taxes": false,
+	"financial_status": "paid",
+	"fulfillment_status": null,
+	"gateway": null,
+	"landing_site": "/api/2021-07/graphql.json",
+	"landing_site_ref": null,
+	"location_id": null,
+	"name": "#8453",
+	"note": "appointment",
+	"note_attributes": [],
+	"number": 7453,
+	"order_number": 8453,
+	"order_status_url": "https://pierce-of-art.myshopify.com/13123682363/orders/3ebe53d520c2ebd4cf79fd4d1a67bb66/authenticate?key=c85b4ae062cff1abfe4f85f569e1a194",
+	"original_total_duties_set": null,
+	"payment_gateway_names": [],
+	"phone": null,
+	"presentment_currency": "GBP",
+	"processed_at": "2021-10-02T19:33:44+01:00",
+	"processing_method": "free",
+	"reference": null,
+	"referring_site": "http://localhost:8080/",
+	"source_identifier": null,
+	"source_name": "web",
+	"source_url": null,
+	"subtotal_price": "0.00",
+	"subtotal_price_set": {
+		"shop_money": { "amount": "0.00", "currency_code": "GBP" },
+		"presentment_money": { "amount": "0.00", "currency_code": "GBP" }
+	},
+	"tags": "",
+	"tax_lines": [],
+	"taxes_included": false,
+	"test": false,
+	"token": "3ebe53d520c2ebd4cf79fd4d1a67bb66",
+	"total_discounts": "8.33",
+	"total_discounts_set": {
+		"shop_money": { "amount": "8.33", "currency_code": "GBP" },
+		"presentment_money": { "amount": "8.33", "currency_code": "GBP" }
+	},
+	"total_line_items_price": "8.33",
+	"total_line_items_price_set": {
+		"shop_money": { "amount": "8.33", "currency_code": "GBP" },
+		"presentment_money": { "amount": "8.33", "currency_code": "GBP" }
+	},
+	"total_outstanding": "0.00",
+	"total_price": "0.00",
+	"total_price_set": {
+		"shop_money": { "amount": "0.00", "currency_code": "GBP" },
+		"presentment_money": { "amount": "0.00", "currency_code": "GBP" }
+	},
+	"total_price_usd": "0.00",
+	"total_shipping_price_set": {
+		"shop_money": { "amount": "0.00", "currency_code": "GBP" },
+		"presentment_money": { "amount": "0.00", "currency_code": "GBP" }
+	},
+	"total_tax": "0.00",
+	"total_tax_set": {
+		"shop_money": { "amount": "0.00", "currency_code": "GBP" },
+		"presentment_money": { "amount": "0.00", "currency_code": "GBP" }
+	},
+	"total_tip_received": "0.00",
+	"total_weight": 0,
+	"updated_at": "2021-10-02T19:33:46+01:00",
+	"user_id": null,
+	"billing_address": {
+		"first_name": "Pavlo",
+		"address1": "Tuhachevskogo street",
+		"phone": "0916221939",
+		"city": "London",
+		"zip": "E1 6AN",
+		"province": "England",
+		"country": "United Kingdom",
+		"last_name": "Poberezhets",
+		"address2": "house 67A",
+		"company": "",
+		"latitude": 51.5188946,
+		"longitude": -0.0783779,
+		"name": "Pavlo Poberezhets",
+		"country_code": "GB",
+		"province_code": "ENG"
+	},
+	"customer": {
+		"id": 5166208745531,
+		"email": "poberezhetspavlo@gmail.com",
+		"accepts_marketing": true,
+		"created_at": "2021-06-01T09:43:20+01:00",
+		"updated_at": "2021-10-02T19:33:46+01:00",
+		"first_name": "Pavlo",
+		"last_name": "Poberezhets",
+		"orders_count": 3,
+		"state": "enabled",
+		"total_spent": "0.00",
+		"last_order_id": 4031517556795,
+		"note": null,
+		"verified_email": false,
+		"multipass_identifier": null,
+		"tax_exempt": false,
+		"phone": null,
+		"tags": "",
+		"last_order_name": "#8453",
+		"currency": "GBP",
+		"accepts_marketing_updated_at": "2021-06-01T09:43:21+01:00",
+		"marketing_opt_in_level": "single_opt_in",
+		"admin_graphql_api_id": "gid://shopify/Customer/5166208745531",
+		"default_address": {
+			"id": 6546753355835,
+			"customer_id": 5166208745531,
+			"first_name": "Pavlo",
+			"last_name": "Poberezhets",
+			"company": "",
+			"address1": "Tuhachevskogo street",
+			"address2": "house 67A",
+			"city": "London",
+			"province": "England",
+			"country": "United Kingdom",
+			"zip": "E1 6AN",
+			"phone": "0916221939",
+			"name": "Pavlo Poberezhets",
+			"province_code": "ENG",
+			"country_code": "GB",
+			"country_name": "United Kingdom",
+			"default": true
+		}
+	},
+	"discount_applications": [
+		{
+			"target_type": "line_item",
+			"type": "discount_code",
+			"value": "100.0",
+			"value_type": "percentage",
+			"allocation_method": "across",
+			"target_selection": "all",
+			"code": "PAVLOTEST100OFF"
+		}
+	],
+	"fulfillments": [],
+	"line_items": [
+		{
+			"id": 10922790813755,
+			"admin_graphql_api_id": "gid://shopify/LineItem/10922790813755",
+			"fulfillable_quantity": 1,
+			"fulfillment_service": "manual",
+			"fulfillment_status": null,
+			"gift_card": false,
+			"grams": 0,
+			"name": "Piercing Appointment",
+			"origin_location": {
+				"id": 2509652066363,
+				"country_code": "GB",
+				"province_code": "",
+				"name": "Pierce of Art",
+				"address1": "3 Knifesmithgate",
+				"address2": "",
+				"city": "Chesterfield",
+				"zip": "S40 1RF"
+			},
+			"price": "8.33",
+			"price_set": {
+				"shop_money": { "amount": "8.33", "currency_code": "GBP" },
+				"presentment_money": {
+					"amount": "8.33",
+					"currency_code": "GBP"
+				}
+			},
+			"product_exists": true,
+			"product_id": 5088504217659,
+			"properties": [
+				{ "name": "Date Time", "value": "10/05/2021 12:30 PM" },
+				{ "name": "Duration", "value": "20 minutes" }
+			],
+			"quantity": 1,
+			"requires_shipping": true,
+			"sku": "",
+			"taxable": true,
+			"title": "Piercing Appointment",
+			"total_discount": "0.00",
+			"total_discount_set": {
+				"shop_money": { "amount": "0.00", "currency_code": "GBP" },
+				"presentment_money": {
+					"amount": "0.00",
+					"currency_code": "GBP"
+				}
+			},
+			"variant_id": 34372308107323,
+			"variant_inventory_management": "shopify",
+			"variant_title": "",
+			"vendor": "Pierce of Art®",
+			"tax_lines": [
+				{
+					"channel_liable": false,
+					"price": "0.00",
+					"price_set": {
+						"shop_money": {
+							"amount": "0.00",
+							"currency_code": "GBP"
+						},
+						"presentment_money": {
+							"amount": "0.00",
+							"currency_code": "GBP"
+						}
+					},
+					"rate": 0.2,
+					"title": "GB VAT"
+				}
+			],
+			"duties": [],
+			"discount_allocations": [
+				{
+					"amount": "8.33",
+					"amount_set": {
+						"shop_money": {
+							"amount": "8.33",
+							"currency_code": "GBP"
+						},
+						"presentment_money": {
+							"amount": "8.33",
+							"currency_code": "GBP"
+						}
+					},
+					"discount_application_index": 0
+				}
+			]
+		}
+	],
+	"payment_terms": null,
+	"refunds": [],
+	"shipping_address": {
+		"first_name": "Pavlo",
+		"address1": "Tuhachevskogo street",
+		"phone": "0916221939",
+		"city": "London",
+		"zip": "E1 6AN",
+		"province": "England",
+		"country": "United Kingdom",
+		"last_name": "Poberezhets",
+		"address2": "house 67A",
+		"company": "",
+		"latitude": 51.5188946,
+		"longitude": -0.0783779,
+		"name": "Pavlo Poberezhets",
+		"country_code": "GB",
+		"province_code": "ENG"
+	},
+	"shipping_lines": [
+		{
+			"id": 3430413467707,
+			"carrier_identifier": null,
+			"code": "Piercing Appointment",
+			"delivery_category": null,
+			"discounted_price": "0.00",
+			"discounted_price_set": {
+				"shop_money": { "amount": "0.00", "currency_code": "GBP" },
+				"presentment_money": {
+					"amount": "0.00",
+					"currency_code": "GBP"
+				}
+			},
+			"phone": null,
+			"price": "0.00",
+			"price_set": {
+				"shop_money": { "amount": "0.00", "currency_code": "GBP" },
+				"presentment_money": {
+					"amount": "0.00",
+					"currency_code": "GBP"
+				}
+			},
+			"requested_fulfillment_service_id": null,
+			"source": "shopify",
+			"title": "Piercing Appointment",
+			"tax_lines": [
+				{
+					"channel_liable": false,
+					"price": "0.00",
+					"price_set": {
+						"shop_money": {
+							"amount": "0.00",
+							"currency_code": "GBP"
+						},
+						"presentment_money": {
+							"amount": "0.00",
+							"currency_code": "GBP"
+						}
+					},
+					"rate": 0.2,
+					"title": "GB VAT"
+				}
+			],
+			"discount_allocations": []
+		}
+	]
+}

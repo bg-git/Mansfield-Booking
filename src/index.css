@@ -1,0 +1,42 @@
+body {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+}
+
+.rbc-event, .rbc-day-slot .rbc-background-event {
+    background-color: #5664d2;
+}
+.rbc-event.rbc-selected, .rbc-day-slot .rbc-selected.rbc-background-event {
+    background-color: #3040b5;
+}
+.rbc-today {
+    background-color: #d7daf4;
+}
+.rbc-toolbar .rbc-toolbar-label {
+    flex-grow: 1;
+    padding: 0 10px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+.rbc-header {
+    padding: 20px 0;
+    font-size: 16px;
+}
+.rbc-btn-group button {
+    cursor: pointer;
+}
+.rbc-calendar {
+    min-height: 720px;
+}
+.MuiButton-root {
+    position: relative;
+}
+.MuiButton-root.active::after {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -14px;
+    content: '';
+    display: block;
+    border-bottom: 4px solid #fff;
+}
