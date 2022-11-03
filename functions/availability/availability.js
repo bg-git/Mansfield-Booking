@@ -20,6 +20,7 @@ const handler = async (event) => {
             const availabilities = [];
             const appointments = [];
             const disabled = [];
+            const disabledDates = [];
             const days = [];
             const client = await clientPromise;
             const database = client.db();
@@ -37,7 +38,8 @@ const handler = async (event) => {
             
             let index = 0;
             await availabilitiesDbData.forEach((val) => {
-                if(!val.available || val.slots === 0) disabled.push(index);
+                if((!val.available || val.slots === 0) && val.type === 'dow') disabled.push(index);
+                else if (val.type === 'date' && !val.available) disabledDates.push(val.dow);
                 
                 availabilities.push(val);
                 index++;
@@ -47,13 +49,36 @@ const handler = async (event) => {
                 appointments.push(val);
             });
 
+            console.log('[availabilities]', availabilities)
+
             for(let i = 0; i < maxBookableDays; i++) {
                 const spots = [];
                 const date = moment().add(i, 'day').format('YYYY-MM-DD');
-                const dow = moment().add(i, 'day').day();
+                const dow = (moment().add(i, 'day').format('dddd')).toLowerCase();
+                console.log('[dow]', dow, date)
 
-                const startTime = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + availabilities[dow].start_time);
-                const endTime = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + availabilities[dow].end_time);
+                let startTime;
+                let endTime;
+                let slots;
+                let available = false;
+
+                availabilities.forEach(availability => {
+                    if (availability.type === 'date' && availability.dow === date) {
+                        startTime = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + availability.start_time);
+                        endTime = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + availability.end_time);
+                        slots = parseInt(availability.slots);
+                        available = availability.available;
+                    }
+                    else if (availability.type === 'dow' && availability.dow === dow) {
+                        startTime = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + availability.start_time);
+                        endTime = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + availability.end_time);
+                        slots = parseInt(availability.slots);
+                        available = availability.available;
+                    }
+                })
+
+                console.log('[flag]', startTime, endTime)
+
                 const totalDuration = moment.duration(endTime.diff(startTime)).asMinutes();
                 const timeForSpot = duration + bufferAfter;
                 const numberOfAvailableSpots = parseInt(totalDuration / timeForSpot);
@@ -69,18 +94,14 @@ const handler = async (event) => {
     
                 index = 0;
                 while(index < numberOfAvailableSpots) {
-                    const hour = availabilities[dow].start_time.split(':')[0];
-                    const minutes = parseInt(availabilities[dow].start_time.split(':')[0]);
-
-                    const newStartTimeObj = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + availabilities[dow].start_time)
+                    const newStartTimeObj = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + startTime.format('hh:mm'))
                                         .add( timeForSpot * index, 'minutes' );
                     const newStartTime = newStartTimeObj.format('hh:mmA');
-                    const newEndTime = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + availabilities[dow].start_time)
-                                        .add( (timeForSpot * index + duration), 'minutes' ).format('hh:mmA')
-                    let slots = parseInt(availabilities[dow].slots);
-
+                    const newEndTime = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + startTime.format('hh:mm'))
+                                        .add( (timeForSpot * index + duration), 'minutes' ).format('hh:mmA');
+                    let slotsTemp = slots;
                     cursorDayAppointments.forEach((val) => {
-                        if(val.time === newStartTime) slots = slots - parseInt(val.qty);
+                        if(val.time === newStartTime) slotsTemp = slotsTemp - parseInt(val.qty);
                     });
 
                     if(moment(new Date()).format('YYYY-MM-DD') == date) {
@@ -98,7 +119,7 @@ const handler = async (event) => {
                     spots.push({
                         start_time: newStartTime,
                         end_time: newEndTime,
-                        slots: slots
+                        slots: slotsTemp
                     });
     
                     index++;
@@ -106,7 +127,7 @@ const handler = async (event) => {
 
                 const day = {
                     date: date,
-                    available: availabilities[dow].available,
+                    available: available,
                     spots: spots
                 }
                 days.push(day);
@@ -117,6 +138,7 @@ const handler = async (event) => {
                 headers,
                 body: JSON.stringify({
                     disabled: disabled,
+                    disabledDates: disabledDates,
                     days: days
                 })
             };

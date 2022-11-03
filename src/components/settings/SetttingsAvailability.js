@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import Modal from '@mui/material/Modal';
 
 import DateAdapter from '@mui/lab/AdapterMoment';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -32,7 +33,18 @@ const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-  
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    bgcolor: 'background.paper',
+    borderRadius: 2,
+    boxShadow: 24,
+    p: 4,
+};
+
 const initialAvailabilities = [
     {
         dow: 'sunday',
@@ -99,6 +111,7 @@ const SetttingsAvailability = () => {
     const [updated, setUpdated] = useState(false);
     const [loaded, setLoaded] = useState(false);
     const [open, setOpen] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
     const [alertType, setAlertType] = useState('success');
     const [message, setMessage] = useState('');
 
@@ -168,6 +181,10 @@ const SetttingsAvailability = () => {
             setOpen(true);
         }
     }
+
+    const addOverride = () => {
+        setOpenModal(true);
+    }
     
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -190,7 +207,23 @@ const SetttingsAvailability = () => {
             <CardHeader
                 subheader="Set your weekly hours"
                 title="Working hours"
+                action={<Button color="primary" variant="contained" onClick={addOverride}>Add override</Button>}
             />
+            <Modal
+                open={openModal}
+                onClose={() => setOpenModal(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h4" component="h2">
+                        Select a date you want to disable, or assign specific hours.
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                    </Typography>
+                </Box>
+            </Modal>            
             <Divider />
             <Snackbar anchorOrigin={{ vertical, horizontal }} open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity={alertType} sx={{ width: '100%' }}>
@@ -209,9 +242,9 @@ const SetttingsAvailability = () => {
                                     <Grid container spacing={3}>
                                         <Grid
                                             item
-                                            lg={2}
-                                            sm={2}
-                                            xl={2}
+                                            lg={3}
+                                            sm={3}
+                                            xl={3}
                                             xs={12}
                                             sx={{
                                                 display: 'flex',
@@ -229,7 +262,7 @@ const SetttingsAvailability = () => {
                                         </Grid>
                                         {
                                             availability.available ? (
-                                                <Grid item lg={8} sm={8} xl={8} xs={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                                                <Grid item lg={7} sm={7} xl={7} xs={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
                                                     <LocalizationProvider dateAdapter={DateAdapter}>
                                                         <TimePicker
                                                             label="Start"
@@ -271,17 +304,8 @@ const SetttingsAvailability = () => {
                                                             updateAvailability(availability.dow, 'slots', e.target.value)
                                                         }}
                                                     />
-                                                    <IconButton
-                                                        color="primary"
-                                                        aria-label="upload picture"
-                                                        component="span"
-                                                        disabled={availability.available ? false : true}
-                                                        onClick={() => updateAvailability(availability.dow, 'available', false)}
-                                                    >
-                                                        <DeleteOutlineIcon />
-                                                    </IconButton>
                                                 </Grid>
-                                            ) : <Grid item lg={8} sm={8} xl={8} xs={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '7px 0' }}>
+                                            ) : <Grid item lg={7} sm={7} xl={7} xs={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '7px 0' }}>
                                                 <Typography variant="h4" component="h4" sx={{ fontWeight: 'normal', lineHeight: 2.1 }}>Unavailable</Typography>
                                             </Grid>
                                         }
@@ -302,10 +326,10 @@ const SetttingsAvailability = () => {
                                                 color="primary"
                                                 aria-label="upload picture"
                                                 component="span"
-                                                disabled={availability.available ? true : false}
-                                                onClick={() => updateAvailability(availability.dow, 'available', true)}
+                                                disabled={availability.type === 'date' ? false : true}
+                                                onClick={() => updateAvailability(availability.dow, 'available', false)}
                                             >
-                                                <ControlPointIcon />
+                                                <DeleteOutlineIcon />
                                             </IconButton>
                                         </Grid>
                                     </Grid>
