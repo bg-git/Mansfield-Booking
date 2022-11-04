@@ -192,7 +192,7 @@ const SetttingsAvailability = () => {
         try {
             const res = await axios({
                 method: 'post',
-                url: process.env.NODE_ENV === 'development' ? `http://localhost:${localBackendPort}/add-override` : `.netlify/functions/add-override`,
+                url: process.env.NODE_ENV === 'development' ? `http://localhost:${localBackendPort}/add-override` : `/.netlify/functions/add-override`,
                 data: JSON.stringify({
                     date: overrideDate.format('YYYY-MM-DD'),
                     start: overrideStart.format('HH:mm'),
@@ -225,7 +225,7 @@ const SetttingsAvailability = () => {
         try {
             const res = await axios({
                 method: 'POST',
-                url: process.env.NODE_ENV === 'development' ? `http://localhost:${localBackendPort}/remove-override` : `.netlify/functions/remove-override`,
+                url: process.env.NODE_ENV === 'development' ? `http://localhost:${localBackendPort}/remove-override` : `/.netlify/functions/remove-override`,
                 data: JSON.stringify({
                     date: selectedOverride
                 })
