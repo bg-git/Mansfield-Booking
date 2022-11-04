@@ -34,7 +34,7 @@ const handler = async (event) => {
             duration = parseInt(setting.duration);
             bufferAfter = parseInt(setting.buffer);
 
-            console.log('[duration]', duration, bufferAfter);
+            // console.log('[duration]', duration, bufferAfter);
             
             let index = 0;
             await availabilitiesDbData.forEach((val) => {
@@ -49,7 +49,7 @@ const handler = async (event) => {
                 appointments.push(val);
             });
 
-            console.log('[availabilities]', availabilities)
+            // console.log('[availabilities]', availabilities)
 
             for(let i = 0; i < maxBookableDays; i++) {
                 const spots = [];
@@ -77,7 +77,7 @@ const handler = async (event) => {
                     }
                 })
 
-                console.log('[flag]', startTime, endTime)
+                // console.log('[flag]', startTime, endTime)
 
                 const totalDuration = moment.duration(endTime.diff(startTime)).asMinutes();
                 const timeForSpot = duration + bufferAfter;
@@ -94,10 +94,10 @@ const handler = async (event) => {
     
                 index = 0;
                 while(index < numberOfAvailableSpots) {
-                    const newStartTimeObj = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + startTime.format('hh:mm'))
+                    const newStartTimeObj = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + startTime.format('HH:mm'))
                                         .add( timeForSpot * index, 'minutes' );
                     const newStartTime = newStartTimeObj.format('hh:mmA');
-                    const newEndTime = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + startTime.format('hh:mm'))
+                    const newEndTime = moment(moment(new Date()).format('YYYY-MM-DD') + ' ' + startTime.format('HH:mm'))
                                         .add( (timeForSpot * index + duration), 'minutes' ).format('hh:mmA');
                     let slotsTemp = slots;
                     cursorDayAppointments.forEach((val) => {
@@ -108,7 +108,7 @@ const handler = async (event) => {
                         const ukNow = moment(momentTimezone.tz('Europe/London').format('YYYY-MM-DD hh:mmA'), 'YYYY-MM-DD hh:mmA');
                         const diff = moment.duration(newStartTimeObj.diff(ukNow));
 
-                        console.log('[diff]', diff.asHours(), newStartTimeObj.format('hh:mmA'), ukNow.format('hh:mmA'));
+                        // console.log('[diff]', diff.asHours(), newStartTimeObj.format('hh:mmA'), ukNow.format('hh:mmA'));
 
                         if (diff.asHours() < 1) {
                             index++;

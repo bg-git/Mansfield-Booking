@@ -21,7 +21,7 @@ import Modal from '@mui/material/Modal';
 import DateAdapter from '@mui/lab/AdapterMoment';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import TimePicker from '@mui/lab/TimePicker';
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 import moment from 'moment';
@@ -38,7 +38,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 500,
+    width: 400,
     bgcolor: 'background.paper',
     borderRadius: 2,
     boxShadow: 24,
@@ -114,6 +114,11 @@ const SetttingsAvailability = () => {
     const [openModal, setOpenModal] = useState(false);
     const [alertType, setAlertType] = useState('success');
     const [message, setMessage] = useState('');
+    const [overrideDate, setOverrideDate] = useState();
+    const [overrideStart, setOverrideStart] = useState(moment().set('hour', 9).set('minute', 0));
+    const [overrideEnd, setOverrideEnd] = useState(moment().set('hour', 18).set('minute', 0));
+    const [overrideAvailable, setOverrideAvailable] = useState(false);
+    const [overrideSlots, setOverrideSlots] = useState(1);
 
     const updateAvailability = (dow, type, value) => {
         let newValue;
@@ -182,8 +187,64 @@ const SetttingsAvailability = () => {
         }
     }
 
-    const addOverride = () => {
-        setOpenModal(true);
+    const addOverride = async () => {
+        setLoaded(false);
+        try {
+            const res = await axios({
+                method: 'post',
+                url: process.env.NODE_ENV === 'development' ? `http://localhost:${localBackendPort}/add-override` : `.netlify/functions/add-override`,
+                data: JSON.stringify({
+                    date: overrideDate.format('YYYY-MM-DD'),
+                    start: overrideStart.format('HH:mm'),
+                    end: overrideEnd.format('HH:mm'),
+                    available: overrideAvailable,
+                    slots: overrideSlots
+                })
+            });
+            console.log('[add override]', res.data);
+            setLoaded(true);
+
+            setMessage('An override saved successfully!');
+            setAlertType('success');
+            setOpen(true);
+            setOpenModal(false);
+
+            await init();
+        }
+        catch (error) {
+            setLoaded(true);
+            setMessage('Something went wrong, try again!');
+            setAlertType('error');
+            setOpen(true);
+        }
+    }
+
+    const removeOverride = async (selectedOverride) => {
+        console.log('[selectedOverride]', selectedOverride)
+        setLoaded(false);
+        try {
+            const res = await axios({
+                method: 'POST',
+                url: process.env.NODE_ENV === 'development' ? `http://localhost:${localBackendPort}/remove-override` : `.netlify/functions/remove-override`,
+                data: JSON.stringify({
+                    date: selectedOverride
+                })
+            });
+            console.log('[remove override]', res.data);
+            setLoaded(true);
+
+            setMessage('An override removed successfully!');
+            setAlertType('success');
+            setOpen(true);
+
+            await init();
+        }
+        catch (error) {
+            setLoaded(true);
+            setMessage('Something went wrong, try again!');
+            setAlertType('error');
+            setOpen(true);
+        }
     }
     
     const handleClose = (event, reason) => {
@@ -198,6 +259,18 @@ const SetttingsAvailability = () => {
         init();
     }, []);
 
+    useEffect(() => {
+        console.log('[overrideDate]', overrideDate)
+    }, [overrideDate])
+
+    useEffect(() => {
+        console.log('[overrideStart]', overrideStart)
+    }, [overrideStart])
+
+    useEffect(() => {
+        console.log('[overrideEnd]', overrideEnd)
+    }, [overrideEnd])
+
     if(!loaded) return <Box sx={{ pt: 3, textAlign: 'center' }}>
         <CircularProgress />
     </Box>;
@@ -207,7 +280,7 @@ const SetttingsAvailability = () => {
             <CardHeader
                 subheader="Set your weekly hours"
                 title="Working hours"
-                action={<Button color="primary" variant="contained" onClick={addOverride}>Add override</Button>}
+                action={<Button color="primary" variant="contained" onClick={() => setOpenModal(true)}>Add override</Button>}
             />
             <Modal
                 open={openModal}
@@ -216,12 +289,95 @@ const SetttingsAvailability = () => {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h4" component="h2">
+                    <Typography id="modal-modal-title" variant="h4" component="h2" sx={{
+                        marginBottom: '10px'
+                    }}>
                         Select a date you want to disable, or assign specific hours.
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
+
+                    <Box sx={{ my: 3, width: '100%' }}>
+                        <LocalizationProvider dateAdapter={DateAdapter} sx={{ width: '100%' }}>
+                            <DesktopDatePicker
+                                openTo="day"
+                                views={['day']}
+                                value={overrideDate}
+                                onChange={(newValue) => {
+                                    setOverrideDate(newValue);
+                                }}
+                                className="override-calendar"
+                                sx={{ width: '100%' }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </LocalizationProvider>    
+                    </Box>         
+
+                    {
+                        overrideDate && (
+                            <Box sx={{ mt: 2 }}>
+                                <FormControlLabel
+                                    control={<Checkbox checked={ overrideAvailable ? true : false } onChange={(e) => setOverrideAvailable(e.target.checked)} />}
+                                    label={`Set as available`}
+                                />
+                                {
+                                    overrideAvailable && (
+                                        <>
+                                            <Box sx={{
+                                                my: 2,
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center'
+                                            }}>
+                                                <LocalizationProvider dateAdapter={DateAdapter}>
+                                                    <TimePicker
+                                                        label="Start"
+                                                        value={overrideStart}
+                                                        onChange={(newValue) => setOverrideStart(newValue)}
+                                                        renderInput={(params) => (
+                                                            <TextField {...params} />
+                                                        )}
+                                                    />
+                                                </LocalizationProvider>
+
+                                                <Box sx={{ m: 1 }} />
+                
+                                                <LocalizationProvider dateAdapter={DateAdapter}>
+                                                    <TimePicker
+                                                        label="End"
+                                                        value={overrideEnd}
+                                                        onChange={(newValue) => setOverrideEnd(newValue)}
+                                                        renderInput={(params) => (
+                                                            <TextField {...params} />
+                                                        )}
+                                                        sx={{ '& .MuiTypography-h3': {
+                                                            fontSize: 48
+                                                        } }}
+                                                    />
+                                                </LocalizationProvider>                                
+                                            </Box>
+                                            <TextField
+                                                id="slots"
+                                                label="Slots"
+                                                type="number"
+                                                variant="outlined"
+                                                value={overrideSlots}
+                                                sx={{ width: '100%' }}
+                                                onChange={(e) => setOverrideSlots(e.target.value)}
+                                            />
+                                        </>
+                                    )
+                                }
+                            </Box>
+                        )
+                    }
+
+                    <Box sx={{ mt: 4, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Button color="primary" variant="outlined" onClick={() => setOpenModal(false)}>
+                            Cancel
+                        </Button>
+                        <Button color="primary" variant="contained" onClick={() => addOverride()} disabled={overrideDate && overrideStart && overrideEnd ? false : true}>
+                            Apply
+                        </Button>
+                    </Box>
                 </Box>
             </Modal>            
             <Divider />
@@ -327,7 +483,7 @@ const SetttingsAvailability = () => {
                                                 aria-label="upload picture"
                                                 component="span"
                                                 disabled={availability.type === 'date' ? false : true}
-                                                onClick={() => updateAvailability(availability.dow, 'available', false)}
+                                                onClick={() => removeOverride(availability.dow)}
                                             >
                                                 <DeleteOutlineIcon />
                                             </IconButton>
