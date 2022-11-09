@@ -55,7 +55,7 @@ const handler = async (event) => {
                 const spots = [];
                 const date = moment().add(i, 'day').format('YYYY-MM-DD');
                 const dow = (moment().add(i, 'day').format('dddd')).toLowerCase();
-                console.log('[dow]', dow, date)
+                // console.log('[dow]', dow, date)
 
                 let startTime;
                 let endTime;
@@ -86,7 +86,7 @@ const handler = async (event) => {
 
                 appointments.forEach((val) => {
                     const appointmentDate = moment(val.dateTime).format('YYYY-MM-DD');
-                    const appointmentTime = moment(val.dateTime).format('hh:mm A');
+                    const appointmentTime = moment(val.dateTime).format('hh:mmA');
                     if(date === appointmentDate) {
                         cursorDayAppointments.push({ time: appointmentTime, qty: val.qty });
                     }

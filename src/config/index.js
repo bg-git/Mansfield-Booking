@@ -1,3 +1,3 @@
-const localBackendPort = 63326;
+const localBackendPort = 55027;
 
 export { localBackendPort };
