@@ -136,7 +136,7 @@ const CustomerListResults = ({ customers, ...rest }) => {
                     {moment(customer.createdAt).format('DD/MM/YYYY')}
                   </TableCell>
                   <TableCell>
-                    <a href={`https://pierce-of-art.myshopify.com/admin/customers/${customer.id}`} target="_blank">View on Shopify admin</a>
+                    <a href={`${process.env.REACT_APP_STORE_URI}/ecommerce/customers/${customer.id}`} target="_blank">View on admin</a>
                   </TableCell>
                 </TableRow>
               ))}

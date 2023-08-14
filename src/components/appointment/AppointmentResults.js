@@ -197,12 +197,12 @@ const AppointmentResults = ({ appointments, ...rest }) => {
                                                     size="small"
                                                 />
                                             </TableCell>
-                                            <TableCell>
+                                            <TableCell>                                                
                                                 <a
-                                                    href={`https://pierce-of-art.myshopify.com/admin/orders/${appointment.orderId}`}
+                                                    href={`${process.env.REACT_APP_STORE_URI}/ecommerce/orders/${appointment.orderId}`}
                                                     target="_blank"
                                                 >
-                                                    View on Shopify admin
+                                                    View on admin
                                                 </a>
                                             </TableCell>
                                         </TableRow>
